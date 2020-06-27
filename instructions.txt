@@ -1,0 +1,168 @@
+Install docker
+
+pi@raspi-black:~ $ sudo apt update
+Hit:1 http://archive.raspberrypi.org/debian buster InRelease
+Hit:2 http://raspbian.raspberrypi.org/raspbian buster InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+All packages are up to date.
+
+pi@raspi-black:~ $ sudo apt full-upgrade
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Calculating upgrade... Done
+The following package was automatically installed and is no longer required:
+  rpi-eeprom-images
+Use 'sudo apt autoremove' to remove it.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+
+
+
+https://docs.docker.com/engine/install/debian/
+
+https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script
+
+
+
+
+pi@raspi-black:~ $ curl -fsSL https://get.docker.com -o get-docker.sh
+
+
+pi@raspi-black:~ $ sudo sh get-docker.sh
+# Executing docker install script, commit: 26ff363bcf3b3f5a00498ac43694bf1c7d9ce16c
++ sh -c apt-get update -qq >/dev/null
++ sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq apt-transport-https ca-certificates curl >/dev/null
++ sh -c curl -fsSL "https://download.docker.com/linux/raspbian/gpg" | apt-key add -qq - >/dev/null
+Warning: apt-key output should not be parsed (stdout is not a terminal)
++ sh -c echo "deb [arch=armhf] https://download.docker.com/linux/raspbian buster stable" > /etc/apt/sources.list.d/docker.list
++ sh -c apt-get update -qq >/dev/null
++ [ -n  ]
++ sh -c apt-get install -y -qq --no-install-recommends docker-ce >/dev/null
++ sh -c docker version
+Client: Docker Engine - Community
+ Version:           19.03.11
+ API version:       1.40
+ Go version:        go1.13.10
+ Git commit:        42e35e6
+ Built:             Mon Jun  1 09:20:15 2020
+ OS/Arch:           linux/arm
+ Experimental:      false
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          19.03.11
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.13.10
+  Git commit:       42e35e6
+  Built:            Mon Jun  1 09:14:09 2020
+  OS/Arch:          linux/arm
+  Experimental:     false
+ containerd:
+  Version:          1.2.13
+  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429
+ runc:
+  Version:          1.0.0-rc10
+  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
+If you would like to use Docker as a non-root user, you should now consider
+adding your user to the "docker" group with something like:
+
+  sudo usermod -aG docker your-user
+
+Remember that you will have to log out and back in for this to take effect!
+
+WARNING: Adding a user to the "docker" group will grant the ability to run
+         containers which can be used to obtain root privileges on the
+         docker host.
+         Refer to https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface
+         for more information.
+
+
+
+pi@raspi-black:~ $ sudo usermod -aG docker pi
+
+
+pi@raspi-black:~ $ sudo systemctl enable docker
+Synchronizing state of docker.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable docker
+
+sudo reboot (alternatively, log out and log back in)
+
+
+pi@raspi-black:~ $ docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (arm32v7)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+
+
+This is great, now we have docker running and confirmed starting up on reboot
+
+
+
+
+--------------------------------------------------------------
+
+Python 2 is installed by default, but is shortly on the path to deprecation so lets install python 3
+sudo apt-get install -y python3 python3-pip
+
+then lets install docker-compose
+
+pi@raspi-black:~ $ sudo pip3 install docker-compose
+
+
+install git
+pi@raspi-black:~ $ sudo apt install git
+
+
+
+pi@raspi-black:~ $ git clone https://github.com/pshima/raspi-docker-tick-grafana.git
+Cloning into 'raspi-docker-tick-grafana'...
+remote: Enumerating objects: 17, done.
+remote: Counting objects: 100% (17/17), done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 17 (delta 1), reused 13 (delta 0), pack-reused 0
+Unpacking objects: 100% (17/17), done.
+pi@raspi-black:~ $ cd raspi-docker-tick-grafana/
+pi@raspi-black:~/raspi-docker-tick-grafana $  boot.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
