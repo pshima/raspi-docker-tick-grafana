@@ -3,39 +3,52 @@ services:
   influxdb:
     image: influxdb:1.8
     volumes:
-      - ./influxdb/data:/var/lib/influxdb
-      - ./influxdb/config/:/etc/influxdb/
+      - ./tick/influxdb/data:/var/lib/influxdb
+      - ./tick/influxdb/config/:/etc/influxdb/
     ports:
       - "8086:8086"
       - "8082:8082"
       - "8089:8089"
+    networks:
+      - tick
 
   telegraf:
     image: telegraf:1.14
     volumes:
-      - ./telegraf/:/etc/telegraf/
+      - ./tick/telegraf/:/etc/telegraf/
       # for monitoring docker containers on the host
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - influxdb
+    networks:
+      - tick
 
   kapacitor:
     image: kapacitor:1.5
     volumes:
-      - ./kapacitor/data/:/var/lib/kapacitor
-      - ./kapacitor/config/:/etc/kapacitor/
+      - ./tick/kapacitor/data/:/var/lib/kapacitor
+      - ./tick/kapacitor/config/:/etc/kapacitor/
     ports:
       - "9092:9092"
     depends_on:
       - influxdb
+    networks:
+      - tick
 
   chronograf:
     image: chronograf:1.8
     volumes:
-      - ./chronograf/data/:/var/lib/chronograf/
+      - ./tick/chronograf/data/:/var/lib/chronograf/
     ports:
       - "8888:8888"
     depends_on:
       - kapacitor
       - influxdb
       - telegraf
+    networks:
+      - tick
+
+networks:
+  tick:
+    driver: bridge
+  
