@@ -1,4 +1,5 @@
 tick/chronograf/data/backup/*
+tick/chronograf/data/chronograf-v1.db
 tick/grafana/data/plugins
 tick/grafana/data/png
 tick/influxdb/data/data
