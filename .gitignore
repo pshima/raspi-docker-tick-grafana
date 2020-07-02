@@ -1,1 +1,8 @@
-tick/*/data/*
+tick/chronograf/data/backup/*
+tick/grafana/data/plugins
+tick/grafana/data/png
+tick/influxdb/data/data
+tick/kapacitor/data/replay/*
+tick/kapacitor/data/cluster.id
+tick/kapacitor/data/server.id
+
