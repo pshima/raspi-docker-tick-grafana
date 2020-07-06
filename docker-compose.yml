@@ -11,6 +11,7 @@ services:
       - "8089:8089"
     networks:
       - tick
+    restart: always
 
   telegraf:
     image: telegraf:1.14
@@ -22,6 +23,7 @@ services:
       - influxdb
     networks:
       - tick
+    restart: always
 
   kapacitor:
     image: kapacitor:1.5
@@ -34,6 +36,7 @@ services:
       - influxdb
     networks:
       - tick
+    restart: always
 
   chronograf:
     image: chronograf:1.8
@@ -47,6 +50,7 @@ services:
       - telegraf
     networks:
       - tick
+    restart: always
 
   grafana:
     image: grafana/grafana
@@ -59,6 +63,7 @@ services:
       - influxdb
     networks:
       - tick
+    restart: always
 
 networks:
   tick:
