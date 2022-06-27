@@ -1,7 +1,7 @@
 version: '3'
 services:
   influxdb:
-    image: influxdb:1.8
+    image: influxdb:2.3
     volumes:
       - ./tick/influxdb/data:/var/lib/influxdb
       - ./tick/influxdb/config/:/etc/influxdb/
@@ -14,7 +14,7 @@ services:
     restart: always
 
   telegraf:
-    image: telegraf:1.14
+    image: telegraf:1.23
     volumes:
       - ./tick/telegraf/:/etc/telegraf/
       # for monitoring docker containers on the host
@@ -26,7 +26,7 @@ services:
     restart: always
 
   kapacitor:
-    image: kapacitor:1.5
+    image: kapacitor:1.6
     volumes:
       - ./tick/kapacitor/data/:/var/lib/kapacitor
       - ./tick/kapacitor/config/:/etc/kapacitor/
@@ -39,7 +39,7 @@ services:
     restart: always
 
   chronograf:
-    image: chronograf:1.8
+    image: chronograf:1.9
     volumes:
       - ./tick/chronograf/data/:/var/lib/chronograf/
     ports:
